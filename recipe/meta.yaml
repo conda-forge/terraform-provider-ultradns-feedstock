@@ -1,11 +1,10 @@
-{% set provider= "UltraDNS" %}
+{% set provider = "UltraDNS" %}
 {% set version = "0.1.0" %}
 
 {% set name = "terraform-provider-" + provider.lower() %}
 {% set x4_plugin = name + '_v' + version + "_x4" %}
 
 {% set sha256 = "562501a30499c629bb39dfb3e8cf7a25649b03ea68a8b4299a46ea6e87526101" %}
-{% set sha256_win32 = "a43724b683b7835df4e103af9cc5de3ebf1630cf2818c3bcfbac06b9795816f7" %}
 {% set sha256_win64 = "eb2d25d4525ae163514f3967bbbb0e64fe053013e32aaaabe785e66a95cdec98" %}
 
 package:
@@ -13,26 +12,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/terraform-providers/{{ name }}/archive/v{{ version }}.tar.gz  # [not win]
-  fn: {{ name }}-{{ version }}.tar.gz  # [not win]
-  sha256: {{ sha256 }}  # [not win]
+  - folder: src/github.com/terraform-providers/{{ name|lower }}
+    url: https://github.com/terraform-providers/{{ name }}/archive/v{{ version }}.tar.gz  # [not win]
+    sha256: {{ sha256 }}  # [not win]
 
-  url: https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_windows_386.zip  # [win32]
-  url: https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_windows_amd64.zip  # [win64]
-  fn: {{ name }}-{{ version }}.zip  # [win]
-  sha256: {{ sha256_win32 }}  # [win32]
-  sha256: {{ sha256_win64 }}  # [win64]
+    url: https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_windows_amd64.zip  # [win64]
+    sha256: {{ sha256_win64 }}  # [win64]
 
 build:
-  number: 0
+  number: 1
   script:
-    - XCOPY {{ x4_plugin }}.exe %LIBRARY_BIN%  # [win]
+    - XCOPY src\github.com\terraform-providers\{{ name|lower }}\{{ x4_plugin }}.exe %LIBRARY_BIN%  # [win]
 
 requirements:
   build:
-    - go 1.8.*  # [not win]
+    - {{ compiler('go') }}  # [not win]
     - make  # [not win]
-    - toolchain  # [not win]
   run:
     - terraform >=0.10
 
@@ -46,7 +41,7 @@ about:
   license: MPL 2.0
   summary: The Terraform {{ provider }} provider
   doc_url: https://www.terraform.io/docs/providers/{{ provider|lower }}/index.html
-  dev_url: https://https://github.com/terraform-providers/{{ name }}
+  dev_url: https://github.com/terraform-providers/{{ name }}
 
 extra:
   recipe-maintainers:
