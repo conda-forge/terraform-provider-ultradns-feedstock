@@ -5,11 +5,13 @@ Home: https://www.terraform.io
 
 Package license: MPL-2.0
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/terraform-provider-ultradns-feedstock/blob/master/LICENSE.txt)
 
 Summary: The Terraform UltraDNS provider
 
+Development: https://github.com/terraform-providers/terraform-provider-ultradns
 
+Documentation: https://www.terraform.io/docs/providers/ultradns/index.html
 
 Current build status
 ====================
