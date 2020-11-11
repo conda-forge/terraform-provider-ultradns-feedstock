@@ -1,6 +1,6 @@
 {% set provider = "UltraDNS" %}
 {% set goname = "github.com/terraform-providers/terraform-provider-"+provider.lower() %}
-{% set version = "0.1.1" %}
+{% set version = "0.2.0" %}
 
 {% set name = goname.split('/')[-1] %}
 {% set pkg_src = ('gopath/src/'+goname).replace("/",os.sep) %}
@@ -14,7 +14,7 @@ package:
 source:
   - folder: {{ pkg_src }}
     url: https://{{ goname }}/archive/v{{ version }}.tar.gz
-    sha256: 31a12dc724ec1c76d0f31d343d3819ccdd5f2e2a87c2617865bf277c80af2882
+    sha256: f5f61fa7a9a39050d66994cfba9ffb58da6f8e3f31ed266cf67ada0690f44783
 
 
 build:
